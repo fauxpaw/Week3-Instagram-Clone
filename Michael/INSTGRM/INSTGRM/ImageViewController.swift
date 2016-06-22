@@ -8,6 +8,9 @@
 
 import UIKit
 
+private var history = [UIImage]()
+
+
 class ImageViewController: UIViewController, Setup, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -72,10 +75,91 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
     }
     
+    @IBAction func saveButtonSelected(sender: AnyObject) {
+        
+        guard let image = self.imageView.image else { return}
+        
+        API.shared.write(Post(image: image)) { (success) in
+            if success {
+                print("Pic sent")
+            } 
+        }
+    }
+    
+    @IBAction func filterButtonSelected(sender: AnyObject) {
+        
+        guard let image = self.imageView.image else { return }
+        
+        let actionSheet = UIAlertController(title: "Filters", message: "Pleaes select a filter to modify your existing photo", preferredStyle: .ActionSheet)
+        
+        let bwAction = UIAlertAction(title: "Black and White", style: .Default) { (action) in
+            
+            Filters.bw(image) { (theImage) in
+                self.imageView.image = theImage
+                history.append(theImage!)
+                print(history.count)
+
+            }
+        }
+        
+        let vintageAction = UIAlertAction(title: "Vintage", style: .Default) { (action) in
+            
+            Filters.vintage(image, completion: { (theImage) in
+                self.imageView.image = theImage
+                history.append(theImage!)
+                print(history.count)
+
+
+            })
+        }
+        
+        let chromeAction = UIAlertAction(title: "Chrome", style: .Default) { (action) in
+            
+            Filters.chrome(image, completion: { (theImage) in
+                self.imageView.image = theImage
+                history.append(theImage!)
+                print(history.count)
+
+
+            })
+        }
+        
+        let undoLast = UIAlertAction(title: "Undo Last", style: .Destructive) { (action) in
+            print("lets undo")
+            
+            if history.count > 1 {
+                history.removeLast()
+                print(history.count)
+                let last = history.last
+                self.imageView.image = last
+            }
+            else {
+                print("there is nothing to undo")
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        actionSheet.addAction(chromeAction)
+        actionSheet.addAction(bwAction)
+        actionSheet.addAction(vintageAction)
+        actionSheet.addAction(undoLast)
+        actionSheet.addAction(cancelAction)
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.imageView.image = image
+        
+        //clear filter history and add original image to stack
+        history = []
+        history.append(self.imageView.image!)
+        print(history.count)
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -83,4 +167,5 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
+
 

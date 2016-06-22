@@ -31,6 +31,11 @@
                         </constraints>
                     </view>
                     <toolbarItems>
+                        <barButtonItem title="Choose Filter" id="sie-R1-Yzk">
+                            <connections>
+                                <action selector="filterButtonSelected:" destination="BYZ-38-t0r" id="hgl-Jf-kUg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="UW1-zN-gPV"/>
                         <barButtonItem systemItem="add" id="mh1-VA-b03">
                             <connections>
@@ -38,6 +43,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="aEW-0q-0L0"/>
+                        <barButtonItem title="Save To iCloud" id="PWY-lB-Nkx">
+                            <connections>
+                                <action selector="saveButtonSelected:" destination="BYZ-38-t0r" id="n9V-oR-Eau"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Jz8-NA-gcX"/>
                     <connections>
