@@ -124,9 +124,23 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
             })
         }
         
-        let undoLast = UIAlertAction(title: "Undo Last", style: .Destructive) { (action) in
-            print("lets undo")
-            
+        let invertAction = UIAlertAction(title: "Invert", style: .Default) { (action) in
+            Filters.invert(image, completion: { (theImage) in
+                self.imageView.image = theImage
+                history.append(theImage!)
+                print(history.count)
+            })
+        }
+        
+        let dotifyAction = UIAlertAction(title: "Dotify", style: .Default) { (action) in
+            Filters.dotify(image, completion: { (theImage) in
+                self.imageView.image = theImage
+                history.append(theImage!)
+                print(history.count)
+            })
+        }
+        
+        let undoLast = UIAlertAction(title: "Undo Last", style: .Destructive) { (action) in            
             if history.count > 1 {
                 history.removeLast()
                 print(history.count)
@@ -141,6 +155,8 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
+        actionSheet.addAction(dotifyAction)
+        actionSheet.addAction(invertAction)
         actionSheet.addAction(chromeAction)
         actionSheet.addAction(bwAction)
         actionSheet.addAction(vintageAction)

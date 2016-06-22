@@ -51,6 +51,13 @@ class Filters {
         self.filter("CIPhotoEffectChrome", image: image, completion: completion)
     }
     
+    class func invert(image: UIImage, completion: FiltersCompletion){
+        self.filter("CIColorInvert", image: image, completion: completion)
+    }
+    
+    class func dotify(image: UIImage, completion: FiltersCompletion){
+        self.filter("CIDotScreen", image: image, completion: completion)
+    }
 }
 
 
