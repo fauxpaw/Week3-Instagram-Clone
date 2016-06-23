@@ -13,6 +13,9 @@
 		4C1DEEEF1D187DF000A7F42E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1DEEEE1D187DF000A7F42E /* Assets.xcassets */; };
 		4C1DEEF21D187DF000A7F42E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1DEEF01D187DF000A7F42E /* LaunchScreen.storyboard */; };
 		4C1DEEFD1D1885D300A7F42E /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DEEFC1D1885D300A7F42E /* Setup.swift */; };
+		4C4821771D1B37B1003B7C65 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4821761D1B37B1003B7C65 /* GalleryViewController.swift */; };
+		4C4821791D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4821781D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift */; };
+		4C48217B1D1B3C2E003B7C65 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C48217A1D1B3C2E003B7C65 /* ImageCollectionViewCell.swift */; };
 		4C5F5D2C1D19E0F100D74F55 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C5F5D2B1D19E0F100D74F55 /* CloudKit.framework */; };
 		4C5F5D2E1D19E1B800D74F55 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F5D2D1D19E1B800D74F55 /* Post.swift */; };
 		4C5F5D301D19E21100D74F55 /* Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F5D2F1D19E21100D74F55 /* Additions.swift */; };
@@ -30,6 +33,9 @@
 		4C1DEEF11D187DF000A7F42E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C1DEEF31D187DF000A7F42E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C1DEEFC1D1885D300A7F42E /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		4C4821761D1B37B1003B7C65 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		4C4821781D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCustomFlowLayout.swift; sourceTree = "<group>"; };
+		4C48217A1D1B3C2E003B7C65 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C5F5D261D19DEE300D74F55 /* INSTGRM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = INSTGRM.entitlements; sourceTree = "<group>"; };
 		4C5F5D2B1D19E0F100D74F55 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4C5F5D2D1D19E1B800D74F55 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 				4C1DEEEE1D187DF000A7F42E /* Assets.xcassets */,
 				4C1DEEF01D187DF000A7F42E /* LaunchScreen.storyboard */,
 				4C1DEEEB1D187DF000A7F42E /* Main.storyboard */,
+				4C4821781D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift */,
+				4C48217A1D1B3C2E003B7C65 /* ImageCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -93,6 +101,7 @@
 		4C1DEEFA1D18801300A7F42E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C4821761D1B37B1003B7C65 /* GalleryViewController.swift */,
 				4C1DEEE91D187DF000A7F42E /* ImageViewController.swift */,
 			);
 			name = Controller;
@@ -198,11 +207,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C5F5D351D19E71A00D74F55 /* Filters.swift in Sources */,
+				4C48217B1D1B3C2E003B7C65 /* ImageCollectionViewCell.swift in Sources */,
 				4C1DEEEA1D187DF000A7F42E /* ImageViewController.swift in Sources */,
 				4C5F5D321D19E44600D74F55 /* ModelAdditions.swift in Sources */,
+				4C4821791D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift in Sources */,
 				4C5F5D301D19E21100D74F55 /* Additions.swift in Sources */,
 				4C1DEEFD1D1885D300A7F42E /* Setup.swift in Sources */,
 				4C1DEEE81D187DF000A7F42E /* AppDelegate.swift in Sources */,
+				4C4821771D1B37B1003B7C65 /* GalleryViewController.swift in Sources */,
 				4C5F5D371D19EDE800D74F55 /* API.swift in Sources */,
 				4C5F5D2E1D19E1B800D74F55 /* Post.swift in Sources */,
 			);

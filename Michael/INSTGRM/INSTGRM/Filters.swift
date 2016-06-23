@@ -14,22 +14,28 @@ class Filters {
     
     typealias FiltersCompletion = (theImage: UIImage?) -> ()
     
+    static let shared = Filters()
+    private let context : CIContext
+    
+    private init(){
+        
+        let options = [kCIContextWorkingColorSpace: NSNull()]
+        let eAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
+        self.context = CIContext(EAGLContext: eAGLContext, options: options)
+    }
+    
 //    static var original = UIImage()
     
-    private class func filter(name: String, image: UIImage, completion: FiltersCompletion){
+    func filter(name: String, image: UIImage, completion: FiltersCompletion){
         
         NSOperationQueue().addOperationWithBlock{
             guard let filter = CIFilter(name: name) else { fatalError("Check yo spelling")}
     
             filter.setValue(CIImage(image: image), forKey: kCIInputImageKey)
             
-            let options = [kCIContextWorkingColorSpace: NSNull()]
-            
-            let eAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
-            let gPUContext = CIContext(EAGLContext: eAGLContext, options: options)
             
             guard let outputImage = filter.outputImage else {fatalError("Error creating output image")}
-            let cgImage = gPUContext.createCGImage(outputImage, fromRect: outputImage.extent)
+            let cgImage = Filters.shared.context.createCGImage(outputImage, fromRect: outputImage.extent)
             
             NSOperationQueue.mainQueue().addOperationWithBlock({ 
                 completion(theImage: UIImage(CGImage: cgImage))
@@ -37,25 +43,25 @@ class Filters {
         }
     }
     
-    class func vintage(image: UIImage, completion: FiltersCompletion){
+     func vintage(image: UIImage, completion: FiltersCompletion){
         
         self.filter("CIPhotoEffectTransfer", image: image, completion: completion)
         //can we load a target for the undo action tab
     }
     
-    class func bw(image: UIImage, completion: FiltersCompletion){
+     func bw(image: UIImage, completion: FiltersCompletion){
         self.filter("CIPhotoEffectMono", image: image, completion: completion)
     }
     
-    class func chrome(image: UIImage, completion: FiltersCompletion){
+     func chrome(image: UIImage, completion: FiltersCompletion){
         self.filter("CIPhotoEffectChrome", image: image, completion: completion)
     }
     
-    class func invert(image: UIImage, completion: FiltersCompletion){
+     func invert(image: UIImage, completion: FiltersCompletion){
         self.filter("CIColorInvert", image: image, completion: completion)
     }
     
-    class func dotify(image: UIImage, completion: FiltersCompletion){
+     func dotify(image: UIImage, completion: FiltersCompletion){
         self.filter("CIDotScreen", image: image, completion: completion)
     }
 }

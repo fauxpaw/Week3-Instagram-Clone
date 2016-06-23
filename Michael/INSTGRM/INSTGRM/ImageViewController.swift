@@ -21,6 +21,9 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         super.viewDidLoad()
         self.setup()
         self.setupAppearance()
+        API.shared.GET { (posts) in
+            print(posts)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -94,7 +97,7 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
         let bwAction = UIAlertAction(title: "Black and White", style: .Default) { (action) in
             
-            Filters.bw(image) { (theImage) in
+            Filters.shared.bw(image) { (theImage) in
                 self.imageView.image = theImage
                 history.append(theImage!)
                 print(history.count)
@@ -104,7 +107,7 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
         let vintageAction = UIAlertAction(title: "Vintage", style: .Default) { (action) in
             
-            Filters.vintage(image, completion: { (theImage) in
+            Filters.shared.vintage(image, completion: { (theImage) in
                 self.imageView.image = theImage
                 history.append(theImage!)
                 print(history.count)
@@ -115,7 +118,7 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
         let chromeAction = UIAlertAction(title: "Chrome", style: .Default) { (action) in
             
-            Filters.chrome(image, completion: { (theImage) in
+            Filters.shared.chrome(image, completion: { (theImage) in
                 self.imageView.image = theImage
                 history.append(theImage!)
                 print(history.count)
@@ -125,7 +128,7 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         }
         
         let invertAction = UIAlertAction(title: "Invert", style: .Default) { (action) in
-            Filters.invert(image, completion: { (theImage) in
+            Filters.shared.invert(image, completion: { (theImage) in
                 self.imageView.image = theImage
                 history.append(theImage!)
                 print(history.count)
@@ -133,7 +136,7 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         }
         
         let dotifyAction = UIAlertAction(title: "Dotify", style: .Default) { (action) in
-            Filters.dotify(image, completion: { (theImage) in
+            Filters.shared.dotify(image, completion: { (theImage) in
                 self.imageView.image = theImage
                 history.append(theImage!)
                 print(history.count)
