@@ -11,19 +11,22 @@ import UIKit
 private var history = [UIImage]()
 
 
-class ImageViewController: UIViewController, Setup, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImageViewController: UIViewController, Setup, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FiltersPreviewViewControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
-
+    
+    var post = Post()
+    
     lazy var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
         self.setupAppearance()
-        API.shared.GET { (posts) in
-            print(posts)
-        }
+        
+//        API.shared.GET { (posts) in
+//            print(posts)
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,12 +40,13 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
     }
     
+    
     func presentImagePicker(sourceType: UIImagePickerControllerSourceType){
         
         self.imagePicker.delegate = self
         self.imagePicker.sourceType = sourceType
         self.presentViewController(imagePicker, animated: true, completion: nil)
-
+        
     }
     
     func setup(){
@@ -82,91 +86,44 @@ class ImageViewController: UIViewController, Setup, UIImagePickerControllerDeleg
         
         guard let image = self.imageView.image else { return}
         
-        API.shared.write(Post(image: image)) { (success) in
+        self.post = Post(image: image)
+        API.shared.write(self.post) { (success) in
             if success {
                 print("Pic sent")
-            } 
+            }
         }
     }
     
     @IBAction func filterButtonSelected(sender: AnyObject) {
         
         guard let image = self.imageView.image else { return }
+        Filters.shared.original = image
+        print(image)
+        self.post = Post(image: image)
         
-        let actionSheet = UIAlertController(title: "Filters", message: "Pleaes select a filter to modify your existing photo", preferredStyle: .ActionSheet)
+        self.performSegueWithIdentifier(FiltersPreviewViewController.id(), sender: nil)
         
-        let bwAction = UIAlertAction(title: "Black and White", style: .Default) { (action) in
-            
-            Filters.shared.bw(image) { (theImage) in
-                self.imageView.image = theImage
-                history.append(theImage!)
-                print(history.count)
-
-            }
-        }
-        
-        let vintageAction = UIAlertAction(title: "Vintage", style: .Default) { (action) in
-            
-            Filters.shared.vintage(image, completion: { (theImage) in
-                self.imageView.image = theImage
-                history.append(theImage!)
-                print(history.count)
-
-
-            })
-        }
-        
-        let chromeAction = UIAlertAction(title: "Chrome", style: .Default) { (action) in
-            
-            Filters.shared.chrome(image, completion: { (theImage) in
-                self.imageView.image = theImage
-                history.append(theImage!)
-                print(history.count)
-
-
-            })
-        }
-        
-        let invertAction = UIAlertAction(title: "Invert", style: .Default) { (action) in
-            Filters.shared.invert(image, completion: { (theImage) in
-                self.imageView.image = theImage
-                history.append(theImage!)
-                print(history.count)
-            })
-        }
-        
-        let dotifyAction = UIAlertAction(title: "Dotify", style: .Default) { (action) in
-            Filters.shared.dotify(image, completion: { (theImage) in
-                self.imageView.image = theImage
-                history.append(theImage!)
-                print(history.count)
-            })
-        }
-        
-        let undoLast = UIAlertAction(title: "Undo Last", style: .Destructive) { (action) in            
-            if history.count > 1 {
-                history.removeLast()
-                print(history.count)
-                let last = history.last
-                self.imageView.image = last
-            }
-            else {
-                print("there is nothing to undo")
-            }
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        actionSheet.addAction(dotifyAction)
-        actionSheet.addAction(invertAction)
-        actionSheet.addAction(chromeAction)
-        actionSheet.addAction(bwAction)
-        actionSheet.addAction(vintageAction)
-        actionSheet.addAction(undoLast)
-        actionSheet.addAction(cancelAction)
-        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == FiltersPreviewViewController.id() {
+            guard let filtersPreviewViewController = segue.destinationViewController as? FiltersPreviewViewController else {return}
+            filtersPreviewViewController.delegate = self
+            filtersPreviewViewController.post = self.post
+        }
+    }
+    
+    func didFinishPickingImage(success: Bool, image: UIImage?) {
+        if success {
+            guard let image = image else {return}
+            self.imageView.image = image
+        } else {
+            print("unsuccessful at retrieving image!")
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     
     //MARK: UIImagePickerControllerDelegate

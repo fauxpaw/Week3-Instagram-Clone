@@ -22,6 +22,8 @@
 		4C5F5D321D19E44600D74F55 /* ModelAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F5D311D19E44600D74F55 /* ModelAdditions.swift */; };
 		4C5F5D351D19E71A00D74F55 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F5D341D19E71A00D74F55 /* Filters.swift */; };
 		4C5F5D371D19EDE800D74F55 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5F5D361D19EDE800D74F55 /* API.swift */; };
+		4C8A98AC1D1C7A5A006F1EC2 /* FiltersPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A98AB1D1C7A5A006F1EC2 /* FiltersPreviewViewController.swift */; };
+		4C8A98AE1D1C85E5006F1EC2 /* FiltersPreviewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A98AD1D1C85E5006F1EC2 /* FiltersPreviewViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		4C5F5D311D19E44600D74F55 /* ModelAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAdditions.swift; sourceTree = "<group>"; };
 		4C5F5D341D19E71A00D74F55 /* Filters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		4C5F5D361D19EDE800D74F55 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		4C8A98AB1D1C7A5A006F1EC2 /* FiltersPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersPreviewViewController.swift; sourceTree = "<group>"; };
+		4C8A98AD1D1C85E5006F1EC2 /* FiltersPreviewViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersPreviewViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		4C1DEEFA1D18801300A7F42E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C8A98AB1D1C7A5A006F1EC2 /* FiltersPreviewViewController.swift */,
 				4C4821761D1B37B1003B7C65 /* GalleryViewController.swift */,
 				4C1DEEE91D187DF000A7F42E /* ImageViewController.swift */,
 			);
@@ -110,6 +115,7 @@
 		4C1DEEFB1D18803600A7F42E /* App Global */ = {
 			isa = PBXGroup;
 			children = (
+				4C8A98AD1D1C85E5006F1EC2 /* FiltersPreviewViewControllerDelegate.swift */,
 				4C5F5D361D19EDE800D74F55 /* API.swift */,
 				4C1DEEF31D187DF000A7F42E /* Info.plist */,
 				4C1DEEE71D187DF000A7F42E /* AppDelegate.swift */,
@@ -213,7 +219,9 @@
 				4C4821791D1B3A04003B7C65 /* GalleryCustomFlowLayout.swift in Sources */,
 				4C5F5D301D19E21100D74F55 /* Additions.swift in Sources */,
 				4C1DEEFD1D1885D300A7F42E /* Setup.swift in Sources */,
+				4C8A98AC1D1C7A5A006F1EC2 /* FiltersPreviewViewController.swift in Sources */,
 				4C1DEEE81D187DF000A7F42E /* AppDelegate.swift in Sources */,
+				4C8A98AE1D1C85E5006F1EC2 /* FiltersPreviewViewControllerDelegate.swift in Sources */,
 				4C4821771D1B37B1003B7C65 /* GalleryViewController.swift in Sources */,
 				4C5F5D371D19EDE800D74F55 /* API.swift in Sources */,
 				4C5F5D2E1D19E1B800D74F55 /* Post.swift in Sources */,

@@ -24,7 +24,7 @@ class Filters {
         self.context = CIContext(EAGLContext: eAGLContext, options: options)
     }
     
-//    static var original = UIImage()
+    var original = UIImage()
     
     func filter(name: String, image: UIImage, completion: FiltersCompletion){
         
@@ -32,15 +32,21 @@ class Filters {
             guard let filter = CIFilter(name: name) else { fatalError("Check yo spelling")}
     
             filter.setValue(CIImage(image: image), forKey: kCIInputImageKey)
-            
-            
+//            print(image)
+//            print(filter.outputImage)
             guard let outputImage = filter.outputImage else {fatalError("Error creating output image")}
+            
             let cgImage = Filters.shared.context.createCGImage(outputImage, fromRect: outputImage.extent)
             
             NSOperationQueue.mainQueue().addOperationWithBlock({ 
                 completion(theImage: UIImage(CGImage: cgImage))
             })
         }
+    }
+    
+    
+    func original(image: UIImage, completion: FiltersCompletion) {
+        completion(theImage: self.original)
     }
     
      func vintage(image: UIImage, completion: FiltersCompletion){
